@@ -12,22 +12,7 @@ pipeline {
                 checkout scm
             }
         }
-        stage('Install ChromeDriver') {
-            steps {
-                script {
-                    // If ChromeDriver is not installed yet, you can download it dynamically
-                    // This is an example, make sure to adjust for your environment
-                    if (!fileExists("${env.WORKSPACE}/chromedriver")) {
-                        echo 'Downloading ChromeDriver...'
-                        sh '''
-                            curl -o chromedriver.zip https://chromedriver.storage.googleapis.com/131.0.6778.205/chromedriver_linux64.zip
-                            unzip chromedriver.zip
-                            mv chromedriver /usr/local/bin/
-                        '''
-                    }
-                }
-            }
-        }
+
         stage('Build and Test') {
             steps {
                 sh 'mvn clean verify' // Run tests and generate JaCoCo reports
