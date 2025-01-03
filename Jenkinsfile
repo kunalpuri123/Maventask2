@@ -5,7 +5,6 @@ pipeline {
     }
     environment {
         SONAR_TOKEN = credentials('sonar-token') // Replace with your credentials ID for the SonarQube token
-        CHROME_DRIVER_PATH = '/opt/homebrew/bin/chromedriver' // Specify the path to your chromedriver
     }
     stages {
         stage('Checkout') {
