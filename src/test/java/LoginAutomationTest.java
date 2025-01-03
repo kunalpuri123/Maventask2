@@ -3,36 +3,19 @@ package com.example.automation;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.junit.jupiter.api.Test;
-import java.net.URL;
-import java.time.Duration;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.time.Duration;
 
 public class LoginAutomationTest {
-
     @Test
-    public void testLogin() throws Exception {
-        // BrowserStack credentials
-        String userName = "kunalpuri_M5HPKA"; // Your BrowserStack Username
-        String accessKey = "PdNGuHxKhmpqXVrMcj2X"; // Your BrowserStack Access Key
-
-        // Set up DesiredCapabilities for BrowserStack
-        DesiredCapabilities caps = new DesiredCapabilities();
-        caps.setCapability("browserName", "Chrome");
-        caps.setCapability("browserVersion", "latest");
-        caps.setCapability("os", "Windows");
-        caps.setCapability("os_version", "10");
-        caps.setCapability("name", "Login Automation Test");
-
-        // URL for BrowserStack's remote WebDriver
-        URL browserStackUrl = new URL("https://" + userName + ":" + accessKey + "@hub-cloud.browserstack.com/wd/hub");
-
-        // Create RemoteWebDriver instance
-        WebDriver driver = new RemoteWebDriver(browserStackUrl, caps);
+    public void testLogin() {
+        // Set the ChromeDriver path
+        System.setProperty("webdriver.chrome.driver", "/opt/homebrew/bin/chromedriver");
+        WebDriver driver = new ChromeDriver();
 
         try {
             // Navigate to the web application
@@ -42,12 +25,12 @@ public class LoginAutomationTest {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
             WebElement pageElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("body"))); // Wait for body tag
 
-            // Wait for the username field, password field, and login button to become visible
+            // Now, wait for the username field to become visible
             WebElement usernameField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(":r1:")));
             WebElement passwordField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(":r3:")));
             WebElement loginButton = wait.until(ExpectedConditions.elementToBeClickable(By.id("loginButton")));
 
-            // Enter login credentials and click the login button
+            // Enter login credentials and click login button
             usernameField.sendKeys("testUser");
             passwordField.sendKeys("testPassword");
             loginButton.click();
@@ -59,7 +42,6 @@ public class LoginAutomationTest {
             String expectedTitle = "Dashboard";
             String actualTitle = driver.getTitle();
             assertEquals(expectedTitle, actualTitle);
-
         } finally {
             // Close the browser
             driver.quit();
