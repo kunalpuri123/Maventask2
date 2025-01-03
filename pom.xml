@@ -22,6 +22,22 @@
             <version>5.10.0</version>
             <scope>test</scope>
         </dependency>
+          
+    <!-- Selenium Java -->
+    <dependency>
+        <groupId>org.seleniumhq.selenium</groupId>
+        <artifactId>selenium-java</artifactId>
+        <version>4.11.0</version>
+    </dependency>
+
+    <!-- WebDriverManager for driver management -->
+    <dependency>
+        <groupId>io.github.bonigarcia</groupId>
+        <artifactId>webdrivermanager</artifactId>
+        <version>5.5.3</version>
+    
+</dependencies>
+
     </dependencies>
 
     <build>
