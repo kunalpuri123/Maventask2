@@ -1,10 +1,10 @@
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class LoginSystem {
+public class LoginAutomation {
     private HashMap<String, String> users; // Stores usernames and passwords
 
-    public LoginSystem() {
+    public LoginAutomation() {
         users = new HashMap<>();
         initializeUsers();
     }
